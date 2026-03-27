@@ -12,9 +12,11 @@ describe('test le panier"', () => {
         cy.contains('button', 'Se connecter').click()
         cy.intercept('GET', '**/products/*').as('getProductInfo')
         cy.intercept('GET', '**/orders*').as('getCartInfo')
+        cy.intercept('GET', '**/products/random*').as('mainPageLoading')
     })
 
     it("vérification de l'ajout d'un produit aux panier avec un utilisateur connécter ", () => {
+        cy.wait('@mainPageLoading')
         cy.goProduct()
         cy.wait('@getProductInfo')
         cy.url().as('postUrl');
@@ -39,24 +41,36 @@ describe('test le panier"', () => {
             cy.get('[data-cy="detail-product-stock"]').should('not.have.text', ' en stock').should('be.visible').invoke('text').then((text) => {
                 const newStock = parseInt(text)
                 cy.log(newStock)
-                expect(newStock).to.be.lessThan(stock) //stock -1
+                expect(newStock).to.be.equal(stock-1)
             })
         })
     })
 
 
     it("vérification des limites lors de l'ajout d'un panier depuis un utilisateur connecté", () => {
+        cy.wait('@mainPageLoading')
         cy.goProduct()
         cy.wait('@getProductInfo')
         cy.get('[data-cy="detail-product-quantity"]').should('be.visible').clear().type(-8)
         cy.get('[data-cy="detail-product-add"]').should('be.visible').click()
 
+        cy.visit("http://localhost:4200/#/cart")
+        cy.wait('@getCartInfo')
+        cy.get('[data-cy="cart-line"]').should('not.exist')
+        cy.goProduct()
+        cy.wait('@getProductInfo')
+
         cy.get('[data-cy="detail-product-quantity"]').should('be.visible').clear().type(21)
         cy.get('[data-cy="detail-product-add"]').should('be.visible').click()
+        cy.wait('@getCartInfo')
+        cy.get('[data-cy="cart-line"]').should('not.exist')
+
+        
 
     })
 
     it("vérification de l'ajout d'un produit via l'api depuis un utilisateur connecté", () => {
+        cy.wait('@mainPageLoading')
         cy.goProduct()
         cy.get('[data-cy="detail-product-name"]').should("be.visible").invoke("text").as("productTitle")
         cy.get('[data-cy="detail-product-stock"]').should('not.have.text', ' en stock').should('be.visible').invoke("text").then((text) => {

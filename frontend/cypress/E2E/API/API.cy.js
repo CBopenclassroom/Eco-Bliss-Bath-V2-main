@@ -34,13 +34,13 @@ describe("test de l'api", () => {
 
 
 
-    it("vérifie que la ", () => {
+    it("Vérfie que l'utilisateur ne peut pas se connecter avec des mauvaises informations ", () => {
         cy.login("test5@test.fr", "test1").then((response) => {
             expect(response.status).to.eq(401)
         })
     })
 
-    it("login correct",()=>{
+    it("Vérfie que l'utilisateur peut se connecter avec des bonnes informations",()=>{
         cy.login("test2@test.fr", "testtest").then(resp=>{
             expect(resp.status).to.eq(200)
         })
