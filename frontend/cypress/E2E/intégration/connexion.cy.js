@@ -1,5 +1,5 @@
 describe('la connexion est fonctionnel"', () => {
-  it("Vérifie la présence du bouton 'ajouter au panier' dans la page d'un produit", () => {
+  it("Vérifie la présence du bouton 'mon panier' dans le menu de navigation depuis une page connecter", () => {
     cy.visit('http://localhost:4200/#/')
     cy.contains('Connexion').click()
     cy.get('[data-cy="login-input-username"]').type("test2@test.fr")

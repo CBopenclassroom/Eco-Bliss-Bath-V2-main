@@ -72,13 +72,13 @@ describe('test le panier"', () => {
     it("vérification de l'ajout d'un produit via l'api depuis un utilisateur connecté", () => {
         cy.wait('@mainPageLoading')
         cy.goProduct()
+        cy.wait('@getProductInfo')
         cy.get('[data-cy="detail-product-name"]').should("be.visible").invoke("text").as("productTitle")
         cy.get('[data-cy="detail-product-stock"]').should('not.have.text', ' en stock').should('be.visible').invoke("text").then((text) => {
             const stock = parseInt(text)
             expect(stock).to.be.greaterThan(1)
             cy.get('[data-cy="detail-product-add"]').should('be.visible').click()
         })
-        cy.wait('@getProductInfo')
         cy.getToken().then(token => {
             cy.getCartList(token).then(list => {
                 const productAdded = list.orderLines[0].product
