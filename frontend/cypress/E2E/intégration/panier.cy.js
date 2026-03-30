@@ -23,7 +23,6 @@ describe('test le panier"', () => {
         cy.get('[data-cy="detail-product-name"]').should("be.visible").invoke("text").as("productTitle")
         cy.get('[data-cy="detail-product-stock"]').should('be.visible').invoke("text").then((text) => {
             const stock = parseInt(text)
-            cy.log(stock)
             expect(stock).to.be.greaterThan(1)
             cy.get('[data-cy="detail-product-add"]').should('be.visible').click()
             cy.wait('@getCartInfo')
