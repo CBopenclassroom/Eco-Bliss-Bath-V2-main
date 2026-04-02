@@ -1,4 +1,4 @@
-describe("test de l'api", () => {
+describe("les tests sur les requêtes de l'api", () => {
     beforeEach(() => {
         cy.emptyCart()
     })
@@ -40,8 +40,8 @@ describe("test de l'api", () => {
         })
     })
 
-    it("Vérfie que l'utilisateur peut se connecter avec des bonnes informations",()=>{
-        cy.login("test2@test.fr", "testtest").then(resp=>{
+    it("Vérfie que l'utilisateur peut se connecter avec des bonnes informations", () => {
+        cy.login("test2@test.fr", "testtest").then(resp => {
             expect(resp.status).to.eq(200)
         })
     })

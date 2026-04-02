@@ -9,7 +9,7 @@ describe('test le panier"', () => {
         cy.get('[data-cy="nav-link-login"]').should('be.visible').click()
         cy.get('[data-cy="login-input-username"]').should('be.visible').type("test2@test.fr")
         cy.get('[data-cy="login-input-password"]').should('be.visible').type("testtest")
-        cy.contains('button', 'Se connecter').click()
+        cy.get('[data-cy="login-submit"]').should('be.visible').click()
         cy.intercept('GET', '**/products/*').as('getProductInfo')
         cy.intercept('GET', '**/orders*').as('getCartInfo')
         cy.intercept('GET', '**/products/random*').as('mainPageLoading')
@@ -40,7 +40,7 @@ describe('test le panier"', () => {
             cy.get('[data-cy="detail-product-stock"]').should('not.have.text', ' en stock').should('be.visible').invoke('text').then((text) => {
                 const newStock = parseInt(text)
                 cy.log(newStock)
-                expect(newStock).to.be.equal(stock-1)
+                expect(newStock).to.be.equal(stock - 1)
             })
         })
     })
@@ -64,7 +64,7 @@ describe('test le panier"', () => {
         cy.wait('@getCartInfo')
         cy.get('[data-cy="cart-line"]').should('not.exist')
 
-        
+
 
     })
 
