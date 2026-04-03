@@ -12,9 +12,10 @@
 </p>
 
 # Prérequis
-Pour démarrer cet applicatif web vous devez avoir les outils suivants:
+Pour démarrer cet applicatif web et lancer les tests vous devez avoir les outils suivants:
 - Docker
 - NodeJs
+- Cypress
 
 # Installation et démarrage
 Clonez le projet pour le récupérer
@@ -37,4 +38,27 @@ npm i
 ou
 npm install (si vous préférez)
 ```
+Lancer le  serveur
+```
+npm start
+```
 
+# Pour lancer les tests
+Démarrer l'API avec ça base de données.
+```
+docker compose up -d
+```
+
+Avoir deux terminaux dans le dossier frontend
+```
+cd ./frontend
+```
+
+Démarer le serveur frontend dans l'un des deux terminaux
+```
+npm start
+```
+Démarer les tests cypress dans l'autre
+```
+npx cypress run
+```
