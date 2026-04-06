@@ -1,6 +1,6 @@
 
 
-describe('test le panier"', () => {
+describe('les tests des scénarios du panier"', () => {
     beforeEach(() => {
         cy.emptyCart()
         cy.clearCookies()

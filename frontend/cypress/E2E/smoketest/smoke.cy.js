@@ -1,4 +1,4 @@
-describe('smoketests', () => {
+describe('les tests smoketests', () => {
   it('Vérifie la présence des champs et du bouton de connexion dans la page "se connecter"', () => {
     cy.visit('http://localhost:4200/#/')
     cy.get('[data-cy="nav-link-login"]').should('be.visible').click()
