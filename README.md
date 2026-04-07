@@ -43,7 +43,7 @@ Lancer le  serveur
 npm start
 ```
 
-# Pour lancer les tests
+# Pour lancer les tests et générer le rapport
 Démarrer l'API avec ça base de données.
 ```
 docker compose up -d
