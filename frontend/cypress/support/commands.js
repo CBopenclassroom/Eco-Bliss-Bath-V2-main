@@ -78,9 +78,7 @@ Cypress.Commands.add("emptyCart", () => {
     cy.getToken().then(token => {
         cy.getCartList(token).then(list => {
             if (list.orderLines.length > 0) {
-                cy.log('passed')
                 list.orderLines.forEach(item => {
-                    cy.log(item)
                     cy.request({
                         method: 'DELETE',
                         url: `http://localhost:8081/orders/${item.id}/delete`,

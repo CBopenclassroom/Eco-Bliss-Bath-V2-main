@@ -39,7 +39,6 @@ describe('les tests des scénarios du panier"', () => {
             cy.wait('@getProductInfo')
             cy.get('[data-cy="detail-product-stock"]').should('not.have.text', ' en stock').should('be.visible').invoke('text').then((text) => {
                 const newStock = parseInt(text)
-                cy.log(newStock)
                 expect(newStock).to.be.equal(stock - 1)
             })
         })
@@ -59,7 +58,7 @@ describe('les tests des scénarios du panier"', () => {
         cy.goProduct()
         cy.wait('@getProductInfo')
 
-        cy.get('[data-cy="detail-product-quantity"]').should('be.visible').clear().type(21)
+        cy.get('[data-cy="detail-product-quantity"]').should('be.visible').clear().type(40)
         cy.get('[data-cy="detail-product-add"]').should('be.visible').click()
         cy.wait('@getCartInfo')
         cy.get('[data-cy="cart-line"]').should('not.exist')
